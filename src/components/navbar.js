@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "gatsby";
 import Sidebar from "react-sidebar";
 import NavLinks from "./navlinks";
-import SocialLinks from "./sociallinks";
+// import SocialLinks from "./sociallinks";
 import Logo from "./logo";
 import { Hamburger } from "./icons";
 
@@ -20,7 +20,7 @@ function SidebarContents() {
                 <NavLinks />
             </div>
             <div className="social-links">
-                <SocialLinks />
+                {/* <SocialLinks /> */}
             </div>
         </div>
     );
