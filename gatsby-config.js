@@ -1,11 +1,11 @@
 let siteMetadata = {
-    title: `Elemental`,
+    title: `Edwin Sanchez`,
     capitalizeTitleOnHome: true,
     logo: `/images/logo.png`,
     icon: `/images/icon.png`,
     titleImage: `/images/wall.jpg`,
-    introTag: `PHOTOGRAPHER | VIDEOGRAPHER`,
-    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet accumsan arcu. Proin ac consequat arcu.`,
+    introTag: `Full Stack Web Developer`,
+    description: `Hospitality Manager transformed into Full Stack Web Developer. South Florida transplant with a focus for 10 years in Hospitality Management and over 5 years experience in management with a successful restaurant group. New focus on Web Development and become a part of a great team to make great products with new skills in front/back end web development.`,
     author: `@_akzhy`,
     blogItemsPerPage: 10,
     portfolioItemsPerPage: 10,
@@ -20,10 +20,10 @@ let siteMetadata = {
             name: "ABOUT",
             url: "/about"
         },
-        {
-            name: "BLOG",
-            url: "/blog"
-        },
+        // {
+        //     name: "BLOG",
+        //     url: "/blog"
+        // },
         {
             name: "PORTFOLIO",
             url: "/portfolio"
@@ -35,15 +35,20 @@ let siteMetadata = {
     ],
     footerLinks: [
         {
-            name: "PRIVACY POLICY",
-            url: "/privacy-policy"
+            name: "LinkedIn",
+            url: "https://www.linkedin.com/in/edwinsanchez33/"
         },
         {
             name: "GitHub",
-            url: "https://github.com/akzhy/gatsby-starter-elemental"
+            url: "https://github.com/edwinsanch33"
         }
     ],
     social: [
+        {
+            name: "LinkedIn",
+            icon: "/images/Linkedin.svg",
+            url: "#"
+        },
         {
             name: "Facebook",
             icon: "/images/Facebook.svg",
@@ -68,10 +73,10 @@ let siteMetadata = {
     contact: {
         /* Leave the below value completely empty (no space either) if you don't want a contact form. */
         api_url: "./test.json",
-        description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet accumsan arcu. Proin ac consequat arcu.`,
-        mail: "hi@akzhy.com",
-        phone: "000-000-0000",
-        address: "1234 \nLocation \nLocation"
+        description: `Please feel free to contact me for any collaborations, interviews, or inquiries.`,
+        mail: "edwinsanch33@gmail.com",
+        phone: "954-464-7285",
+        address: "Fort Lauderdale, FL"
     }
 };
 

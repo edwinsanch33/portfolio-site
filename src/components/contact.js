@@ -182,6 +182,7 @@ class Contact extends React.Component {
                                                     : "")
                                             }
                                             onClick={this.handleSubmit}
+                                            type="submit"
                                             id="submit"
                                             ref={c => (this.btn = c)}
                                         >
