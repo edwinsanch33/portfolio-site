@@ -41,9 +41,9 @@ class Contact extends React.Component {
                 body = `name=${name}&email=${email}&message=${message}`;
 
             fetch("/", {
-                method: "post",
+                method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: { "form-name": "contact", body }
+                body: body
             })
                 .then(function(res) {
                     return res.json();
