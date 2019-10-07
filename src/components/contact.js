@@ -43,7 +43,7 @@ class Contact extends React.Component {
             fetch("/", {
                 method: "post",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: body
+                body: encode({ "form-name": "contact", body })
             })
                 .then(function(res) {
                     return res.json();
@@ -118,7 +118,7 @@ class Contact extends React.Component {
                 >
                     {this.showContactForm && (
                         <div className="col s12 m6">
-                            <form method="POST" name="contact" netlify>
+                            <form name="contact" netlify>
                                 <div className="field">
                                     <label>
                                         <span className="label text-tertiary">
