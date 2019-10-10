@@ -77,7 +77,7 @@ class Contact extends React.Component {
                             _this.resMessage.style.opacity = 0;
                         }, 5000);
                     },
-                    error => {
+                    _error => {
                         this.resMessage.innerHTML = "Message sent succesfully";
                         this.resMessage.classList.remove("color-error");
                         this.setState({
