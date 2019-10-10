@@ -5,6 +5,12 @@ import { PaperPlane, Mapmarker, Mobile, Envelope, Loading } from "./icons";
 // import SocialLinks from "./sociallinks";
 import "../style/contact.less";
 
+const encode = (data) => {
+    return Object.keys(data)
+        .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+        .join("&");
+  }
+
 class Contact extends React.Component {
     constructor(props) {
         super(props);
@@ -43,7 +49,7 @@ class Contact extends React.Component {
             fetch("/", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: body
+                body: encode(body)
             })
                 .then(function(res) {
                     return res.json();
