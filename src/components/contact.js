@@ -29,7 +29,7 @@ class Contact extends React.Component {
     }
 
     handleSubmit(event) {
-        event.preventDefault();
+        
         if (!this.state.submitDisabled) {
             this.setState({
                 submitDisabled: true
@@ -84,6 +84,7 @@ class Contact extends React.Component {
                     }
                 );
         }
+        event.preventDefault();
     }
 
     componentDidMount() {
