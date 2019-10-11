@@ -87,10 +87,9 @@ class Contact extends React.Component {
                         setTimeout(function() {
                             _this.resMessage.style.opacity = 0;
                         }, 5000);
-                    }
-                );
-        }
-        event.preventDefault();
+                    },
+                    );
+                }          
     }
 
     componentDidMount() {
