@@ -11,6 +11,16 @@ This project was inspired by a UX/UI student. Our team collaborated from wire-fr
 
 [row]
 [col]
+[Happy Dog 101](http://happydog101.herokuapp.com "Happy Dog 101 Site")
+[/col]
+
+[col]
+[GitHub Repo](https://github.com/wyncode/darci_edwin_jajuan_syed "Project Repo")
+[/col]
+[/row]
+
+[row]
+[col]
 ![image](./happydog1.png)
 
 This is the reactive search that renders breeds based on the filters provided which come from the details of a breed in the seed data. 
