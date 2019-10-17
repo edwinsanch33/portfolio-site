@@ -19,6 +19,7 @@ This project was inspired by a UX/UI student. Our team collaborated from wire-fr
 [/col]
 [/row]
 
+
 [row]
 [col]
 ![image](./happydog1.png)
