@@ -112,6 +112,14 @@ module.exports = {
             options: {
                 strictMath: true
             }
-        }
+        },
+        {
+            resolve: "gatsby-plugin-google-tagmanager",
+            options: {
+              id: "UA-157756738-1",
+              includeInDevelopment: false,
+              defaultDataLayer: { platform: "gatsby" },
+            },
+        }, 
     ]
 };
