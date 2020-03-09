@@ -5,7 +5,7 @@ let siteMetadata = {
     icon: `/images/icon.png`,
     titleImage: `/images/buzz.jpg`,
     introTag: `Full Stack Web Developer`,
-    description: `Full Stack Developer with a background in Hospitality Management. New focus on Development of  mobile first web applications and mobile applications. Currently with [Game Point Performance](https://gamepointperformance.com/) on a part time basis. I'm looking to become part of a great team to make great products with new skills in front/back end web development.`,
+    description: `Full Stack Developer with a background in Hospitality Management. New focus on Development of  mobile first web applications and mobile applications. Currently with (Game Point Performance)[https://gamepointperformance.com/] on a part time basis. I'm looking to become part of a great team to make great products with new skills in front/back end web development.`,
     author: `@_akzhy`,
     blogItemsPerPage: 10,
     portfolioItemsPerPage: 10,
