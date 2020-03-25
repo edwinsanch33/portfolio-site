@@ -1,7 +1,7 @@
 ---
 title: Game Point Performance
 description: Programming designed to improve speed, agility, power, durability, and conditioning. 
-date: 2019-08-24
+date: 2019-08-25
 template: portfolio
 image: ./GamePoint Logo.png
 ---
