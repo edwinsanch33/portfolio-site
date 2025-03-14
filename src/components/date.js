@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function({ data }) {
+export default function GatsbyDate({ data }) {
     let d = new Date(data),
         months = [
             "January",

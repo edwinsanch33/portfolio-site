@@ -20,7 +20,7 @@ function ListItem(props) {
                             {...anchorAttrs}
                             className={
                                 "/" + location.pathname.split("/")[1] ===
-                                data.url
+                                    data.url
                                     ? "active"
                                     : ""
                             }
@@ -55,12 +55,12 @@ class ThemeSwitchButton extends React.Component {
             })
         }
 
-        this.switchBtn.addEventListener("click", function() {
+        this.switchBtn.addEventListener("click", function () {
             _this.setState({
                 darkMode: !_this.state.darkMode
             });
             localStorage.setItem("darkMode", _this.state.darkMode);
-            
+
             document.body.className = _this.state.darkMode ? "dark-mode" : "";
         });
     }
@@ -90,7 +90,7 @@ class ThemeSwitchButton extends React.Component {
     }
 }
 
-export default function() {
+export default function NavLinks() {
     const data = useStaticQuery(graphql`
         query NavbarLinkQuery {
             site {
@@ -108,7 +108,7 @@ export default function() {
     const items = data.site.siteMetadata.navLinks;
     let list = [];
 
-    items.forEach(function(e, i) {
+    items.forEach(function (e, i) {
         list.push(<ListItem key={e.url + "-" + i} data={e} />);
     });
 

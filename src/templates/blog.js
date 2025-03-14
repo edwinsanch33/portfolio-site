@@ -3,14 +3,14 @@ import { graphql } from "gatsby";
 import Img from "gatsby-image";
 import Layout from "../components/layout";
 import LatestPosts from "../components/blogposts-latest";
-import SEO from "../components/seo";
+import Seo from "../components/seo";
 import Date from "../components/date";
 import "../style/blog-singlepage.less";
 
-export default function({ data }) {
+export default function Blog({ data }) {
     return (
         <Layout>
-            <SEO
+            <Seo
                 lang="en"
                 title={data.markdownRemark.frontmatter.title}
                 description={data.markdownRemark.frontmatter.description}

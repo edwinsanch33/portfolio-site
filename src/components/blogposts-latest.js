@@ -2,13 +2,13 @@ import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import BlogItems from "./items-blog";
 
-export default function(props) {
+export default function LatestBlogPosts(props) {
     const query = useStaticQuery(graphql`
         query latestBlogList {
             allMarkdownRemark(
                 filter: { fileAbsolutePath: { regex: "/blog/" } }
                 limit: 6
-                sort: { fields: [frontmatter___date], order: DESC }
+                sort: { frontmatter: { date: DESC } }
             ) {
                 edges {
                     node {

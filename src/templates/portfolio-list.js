@@ -4,7 +4,7 @@ import Layout from "../components/layout";
 import PortfolioItems from "../components/items-portfolio";
 import SectionTitle from "../components/sectiontitle";
 import Pagination from "../components/pagination";
-import SEO from "../components/seo";
+import Seo from "../components/seo";
 
 class PortfolioList extends React.Component {
     render() {
@@ -17,7 +17,7 @@ class PortfolioList extends React.Component {
                     </div>
                     <PortfolioItems data={query} />
                     <Pagination
-                        pathContext={this.props.pathContext}
+                        pageContext={this.props.pageContext}
                         type="portfolio"
                     />
                 </section>
@@ -28,11 +28,11 @@ class PortfolioList extends React.Component {
     }
 }
 
-export default function({ data, pathContext }) {
+export default function Portfolio_List({ data, pageContext }) {
     return (
         <Layout>
-            <SEO lang="en" title="Portfolio" />
-            <PortfolioList datas={data} pathContext={pathContext} />
+            <Seo lang="en" title="Portfolio" />
+            <PortfolioList datas={data} pageContext={pageContext} />
         </Layout>
     );
 }
@@ -41,7 +41,7 @@ export const query = graphql`
     query portfolioListPage($skip: Int!, $limit: Int!) {
         allMarkdownRemark(
             filter: { fileAbsolutePath: { regex: "/portfolio/" } }
-            sort: { fields: [frontmatter___date], order: DESC }
+            sort: { frontmatter: { date: DESC } }
             limit: $limit
             skip: $skip
         ) {

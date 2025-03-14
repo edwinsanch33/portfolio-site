@@ -3,13 +3,13 @@ import { useStaticQuery, graphql } from "gatsby";
 import BlogItems from "./items-blog";
 import SectionTitle from "./sectiontitle";
 
-export default function() {
+export default function () {
     const query = useStaticQuery(graphql`
         query blogList {
             allMarkdownRemark(
                 filter: { fileAbsolutePath: { regex: "/blog/" } }
                 limit: 6
-                sort: { fields: [frontmatter___date], order: DESC }
+                sort: { frontmatter: { date: DESC } }
             ) {
                 edges {
                     node {

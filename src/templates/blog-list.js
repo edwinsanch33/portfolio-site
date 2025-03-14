@@ -4,7 +4,7 @@ import Layout from "../components/layout";
 import BlogItems from "../components/items-blog";
 import SectionTitle from "../components/sectiontitle";
 import Pagination from "../components/pagination";
-import SEO from "../components/seo";
+import Seo from "../components/seo";
 
 class BlogList extends React.Component {
     render() {
@@ -17,7 +17,7 @@ class BlogList extends React.Component {
                     </div>
                     <BlogItems data={query} />
                     <Pagination
-                        pathContext={this.props.pathContext}
+                        pageContext={this.props.pageContext}
                         type="blog"
                     />
                 </section>
@@ -28,11 +28,11 @@ class BlogList extends React.Component {
     }
 }
 
-export default function({ data, pathContext }) {
+export default function Blog_List({ data, pageContext }) {
     return (
         <Layout>
-            <SEO lang="en" title="Blog" />
-            <BlogList datas={data} pathContext={pathContext} />
+            <Seo lang="en" title="Blog" />
+            <BlogList datas={data} pageContext={pageContext} />
         </Layout>
     );
 }
@@ -41,7 +41,7 @@ export const query = graphql`
     query blogListPage($skip: Int!, $limit: Int!) {
         allMarkdownRemark(
             filter: { fileAbsolutePath: { regex: "/blog/" } }
-            sort: { fields: [frontmatter___date], order: DESC }
+            sort: { frontmatter: { date: DESC } }
             limit: $limit
             skip: $skip
         ) {

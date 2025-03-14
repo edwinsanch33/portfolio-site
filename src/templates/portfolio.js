@@ -1,10 +1,10 @@
 import React from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
-import SEO from "../components/seo";
+import Seo from "../components/seo";
 import Date from "../components/date";
 import { Row, Col } from "../components/page-components/grid";
-import MD from "gatsby-custom-md";
+import Md from "gatsby-custom-md";
 import "../style/portfolio-singlepage.less";
 
 const components = {
@@ -12,10 +12,10 @@ const components = {
     col: Col
 };
 
-export default function({ data }) {
+export default function Portfolio({ data }) {
     return (
         <Layout>
-            <SEO
+            <Seo
                 lang="en"
                 title={data.markdownRemark.frontmatter.title}
                 description={data.markdownRemark.frontmatter.description}
@@ -31,7 +31,7 @@ export default function({ data }) {
                     </div>
                     <div className="content row flex">
                         <div className="col s12">
-                            <MD
+                            <Md
                                 components={components}
                                 htmlAst={data.markdownRemark.htmlAst}
                             />

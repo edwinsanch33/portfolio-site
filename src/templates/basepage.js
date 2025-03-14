@@ -2,13 +2,13 @@ import React from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import Img from "gatsby-image";
-import SEO from "../components/seo";
+import Seo from "../components/seo";
 import "../style/basepage.less";
 
-export default function({ data }) {
+export default function BasePage({ data }) {
     return (
         <Layout>
-            <SEO
+            <Seo
                 lang="en"
                 title={data.markdownRemark.frontmatter.title}
                 description={data.markdownRemark.frontmatter.description}

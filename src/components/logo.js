@@ -1,7 +1,7 @@
 import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
 
-export default function() {
+export default function Logo() {
     const query = useStaticQuery(graphql`
         query LogoQuery {
             site {

@@ -5,18 +5,14 @@ import { PaperPlane, Mapmarker, Mobile, Envelope, Loading } from "./icons";
 // import SocialLinks from "./sociallinks";
 import "../style/contact.less";
 
-const encode = (data) => {
-    return Object.keys(data)
-        .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-        .join("&");
-  }
-
 class Contact extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
-            submitDisabled: false
+            submitDisabled: false,
+            name: '',
+            email: '',
+            message: ''
         };
 
         this.textAreaInput = this.textAreaInput.bind(this);
@@ -34,62 +30,63 @@ class Contact extends React.Component {
         event.target.style.height = event.target.scrollHeight + "px";
     }
 
-    handleSubmit(event) {
-        
-        if (!this.state.submitDisabled) {
-            this.setState({
-                submitDisabled: true
-            });
+    handleChange = (e) => {
+        this.setState({ [e.target.name]: e.target.value });
+    }
 
-            let name = this.dataName.value,
-                email = this.dataEmail.value,
-                message = this.dataMessage.value,
-                body = `name=${name}&email=${email}&message=${message}`;
+    handleSubmit = (e) => {
+        e.preventDefault();
+        if (!this.state.submitDisabled) {
+            this.setState({ submitDisabled: true });
 
             fetch("/", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: encode(body)
+                body: new URLSearchParams({
+                    "form-name": "contact",
+                    ...this.state
+                }).toString()
             })
-                .then(function(res) {
-                    return res.json();
+                .then(response => {
+                    if (response.ok) {
+                        this.setState({
+                            submitDisabled: false,
+                            name: '',
+                            email: '',
+                            message: ''
+                        });
+                        this.showSuccessMessage();
+                    } else {
+                        this.showErrorMessage();
+                    }
                 })
-                .then(
-                    result => {
-                        this.setState({
-                            submitDisabled: false
-                        });
-                        this.resMessage.style.opacity = 1;
-                        if (result.response === "error") {
-                            this.resMessage.innerHTML =
-                                "There was an error in sending the message";
-                            this.resMessage.classList.add("color-error");
-                        } else {
-                            this.resMessage.innerHTML =
-                                "Message sent succesfully";
-                            this.resMessage.classList.remove("color-error");
-                        }
-                        this.dataName.value = "";
-                        this.dataEmail.value = "";
-                        this.dataMessage.value = "";
-                        let _this = this;
-                        setTimeout(function() {
-                            _this.resMessage.style.opacity = 0;
-                        }, 5000);
-                    },
-                    _error => {
-                        this.resMessage.innerHTML = "Message sent succesfully";
-                        this.resMessage.classList.remove("color-error");
-                        this.setState({
-                            submitDisabled: false
-                        });
-                        let _this = this;
-                        setTimeout(function() {
-                            _this.resMessage.style.opacity = 0;
-                        }, 5000);
-                    },
-                    );
-                }          
+                .catch(error => {
+                    this.showErrorMessage();
+                });
+        }
+    }
+
+    showSuccessMessage = () => {
+        if (this.resMessage) {
+            this.resMessage.style.opacity = 1;
+            this.resMessage.innerHTML = "Message sent successfully";
+            this.resMessage.classList.remove("color-error");
+            setTimeout(() => {
+                this.resMessage.style.opacity = 0;
+            }, 5000);
+        }
+    }
+
+    showErrorMessage = () => {
+        if (this.resMessage) {
+            this.resMessage.style.opacity = 1;
+            this.resMessage.innerHTML = "There was an error sending the message";
+            this.resMessage.classList.add("color-error");
+            this.setState({ submitDisabled: false });
+            setTimeout(() => {
+                this.resMessage.style.opacity = 0;
+            }, 5000);
+        }
     }
 
     componentDidMount() {
@@ -102,7 +99,7 @@ class Contact extends React.Component {
 
         let li = this.contactArea.querySelectorAll(".item");
 
-        li.forEach(function(e, i) {
+        li.forEach(function (e, i) {
             let p = e.querySelector("path");
             if (p)
                 p.setAttribute(
@@ -124,107 +121,83 @@ class Contact extends React.Component {
                 >
                     {this.showContactForm && (
                         <div className="col s12 m6">
-                            <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field">
+                            <form
+                                name="contact"
+                                method="POST"
+                                data-netlify="true"
+                                data-netlify-honeypot="bot-field"
+                                onSubmit={this.handleSubmit}
+                            >
                                 <input type="hidden" name="form-name" value="contact" />
                                 <div className="field">
-                                    <label>
-                                        <span className="label text-tertiary">
-                                            Name
-                                        </span>
-                                        <div className="input-border">
-                                            <input
-                                                type="text"
-                                                ref={c => (this.dataName = c)}
-                                                className="field-box"
-                                                name="name"
-                                                id="name"
-                                                required
-                                            />
-                                        </div>
+                                    <label htmlFor="name" className="label text-tertiary">
+                                        Name
                                     </label>
+                                    <div className="input-border">
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            id="name"
+                                            value={this.state.name}
+                                            onChange={this.handleChange}
+                                            className="field-box"
+                                            required
+                                        />
+                                    </div>
                                 </div>
                                 <div className="field">
-                                    <label>
-                                        <span className="label text-tertiary">
-                                            Email
-                                        </span>
-                                        <div className="input-border">
-                                            <input
-                                                type="email"
-                                                ref={c => (this.dataEmail = c)}
-                                                className="field-box"
-                                                name="email"
-                                                id="email"
-                                                required
-                                            />
-                                        </div>
+                                    <label htmlFor="email" className="label text-tertiary">
+                                        Email
                                     </label>
+                                    <div className="input-border">
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            id="email"
+                                            value={this.state.email}
+                                            onChange={this.handleChange}
+                                            className="field-box"
+                                            required
+                                        />
+                                    </div>
                                 </div>
                                 <div className="field">
-                                    <label>
-                                        <span className="label text-tertiary">
-                                            Message
-                                        </span>
-                                        <div className="input-border">
-                                            <textarea
-                                                style={{ overflowY: "hidden" }}
-                                                ref={c =>
-                                                    (this.dataMessage = c)
-                                                }
-                                                className="field-box"
-                                                onChange={this.textAreaInput}
-                                                name="message"
-                                                id="message"
-                                                required
-                                            />
-                                        </div>
+                                    <label htmlFor="message" className="label text-tertiary">
+                                        Message
                                     </label>
+                                    <div className="input-border">
+                                        <textarea
+                                            name="message"
+                                            id="message"
+                                            value={this.state.message}
+                                            onChange={this.handleChange}
+                                            className="field-box"
+                                            required
+                                        />
+                                    </div>
                                 </div>
                                 <div className="field">
-                                    <label className="ib">
-                                        <button
-                                            className={
-                                                "btn" +
-                                                (this.state.submitDisabled
-                                                    ? " disabled"
-                                                    : "")
-                                            }
-                                            onClick={this.handleSubmit}
-                                            type="submit"
-                                            id="submit"
-                                            ref={c => (this.btn = c)}
-                                        >
-                                            SEND{" "}
-                                            <span
-                                                className="icon paper-plane"
-                                                style={{
-                                                    display: this.state
-                                                        .submitDisabled
-                                                        ? "none"
-                                                        : "inline-block"
-                                                }}
-                                            >
-                                                <PaperPlane />
-                                            </span>
-                                            <span
-                                                className="icon loading"
-                                                style={{
-                                                    display: !this.state
-                                                        .submitDisabled
-                                                        ? "none"
-                                                        : "inline-block"
-                                                }}
-                                            >
+                                    <button
+                                        type="submit"
+                                        className={`btn${this.state.submitDisabled ? " disabled" : ""}`}
+                                        disabled={this.state.submitDisabled}
+                                    >
+                                        SEND{" "}
+                                        {this.state.submitDisabled ? (
+                                            <span className="icon loading">
                                                 <Loading />
                                             </span>
-                                        </button>
-                                    </label>
-                                    <label>
-                                        <p
-                                            className="res-message"
-                                            ref={c => (this.resMessage = c)}
-                                        ></p>
-                                    </label>
+                                        ) : (
+                                            <span className="icon paper-plane">
+                                                <PaperPlane />
+                                            </span>
+                                        )}
+                                    </button>
+                                    <p
+                                        className="res-message"
+                                        ref={c => (this.resMessage = c)}
+                                        style={{ opacity: 0 }}
+                                    ></p>
                                 </div>
                             </form>
                         </div>
@@ -288,9 +261,10 @@ class Contact extends React.Component {
     }
 }
 
-export default () => (
-    <StaticQuery
-        query={graphql`
+export default function ContactPage() {
+    return (
+        <StaticQuery
+            query={graphql`
             query {
                 site {
                     siteMetadata {
@@ -305,6 +279,7 @@ export default () => (
                 }
             }
         `}
-        render={data => <Contact contact={data.site.siteMetadata.contact} />}
-    />
-);
+            render={data => <Contact contact={data.site.siteMetadata.contact} />}
+        />
+    );
+}

@@ -17,7 +17,7 @@ function ListItem(props) {
     );
 }
 
-export default function() {
+export default function FooterLinks() {
     const data = useStaticQuery(graphql`
         query FooterLinkQuery {
             site {
@@ -34,7 +34,7 @@ export default function() {
     const items = data.site.siteMetadata.footerLinks;
     let list = [];
 
-    items.forEach(function(e, i) {
+    items.forEach(function (e, i) {
         list.push(<ListItem key={e.url + "-" + i} data={e} />);
     });
 

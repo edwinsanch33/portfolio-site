@@ -47,10 +47,10 @@ class PortfolioItem extends React.Component {
     }
 }
 
-export default function(props) {
+export default function PortfolioItems(props) {
     const data = props.data.allMarkdownRemark.edges;
     let items = [];
-    data.forEach(function(e, i) {
+    data.forEach(function (e, i) {
         items.push(<PortfolioItem key={e.node.id} data={e} />);
     });
     return <div className="row">{items}</div>;

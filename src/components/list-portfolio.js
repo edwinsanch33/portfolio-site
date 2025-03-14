@@ -2,13 +2,13 @@ import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import PortfolioItems from "./items-portfolio";
 
-export default function() {
+export default function PortfolioList() {
     const query = useStaticQuery(graphql`
         query portfolioList {
             allMarkdownRemark(
                 filter: { fileAbsolutePath: { regex: "/portfolio/" } }
                 limit: 6
-                sort: { fields: [frontmatter___date], order: DESC }
+                sort: { frontmatter: { date: DESC } }
             ) {
                 edges {
                     node {

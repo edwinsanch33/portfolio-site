@@ -50,38 +50,22 @@ class Navbar extends React.Component {
     componentDidMount() {
         this.changeNavbarPlaceholderHeight();
 
-        let logo = this.nav.querySelector(".logo"),
-            _this = this;
-
-        logo.addEventListener("load", function() {
-            _this.changeNavbarPlaceholderHeight();
-        });
-
-        this.changeNavbarHeight();
-    }
-
-    changeNavbarHeight() {
-        /* While the name states changeNavbarHeight, this does not directly change the navbar height. It simply reduces the width of the logo, which reduces the height and thereby the overall navbar height.
-
-		Also this slightly reduces the vertical padding
-
-		*/
-
-        window.addEventListener("scroll", function() {
-            if (this.scrollY > 0) {
-                document.querySelector("nav").classList.add("scrolled");
-            } else {
-                document.querySelector("nav").classList.remove("scrolled");
+        let width = window.innerWidth;
+        window.addEventListener("resize", () => {
+            if (width !== window.innerWidth) {
+                width = window.innerWidth;
+                this.changeNavbarPlaceholderHeight();
             }
         });
     }
 
     changeNavbarPlaceholderHeight() {
         let navBar = document.querySelector("nav");
-        let navbarPlaceholderHeight = navBar.offsetHeight;
-        this.setState({
-            navbarPlaceholderHeight: navbarPlaceholderHeight
-        });
+        if (navBar) {
+            this.setState({
+                navbarPlaceholderHeight: navBar.offsetHeight
+            });
+        }
     }
 
     render() {
@@ -96,20 +80,35 @@ class Navbar extends React.Component {
                     styles={{
                         sidebar: {
                             zIndex: 101,
-                            position: "fixed"
+                            position: "fixed",
+                            top: 0,
+                            bottom: 0,
+                            transition: "transform .3s ease-out",
+                            WebkitTransition: "-webkit-transform .3s ease-out",
+                            willChange: "transform",
+                            overflowY: "auto"
                         },
                         overlay: {
-                            zIndex: 100
-                        },
-                        dragHandle: {
+                            zIndex: 100,
                             position: "fixed",
-                            zIndex: "99999"
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            opacity: 0,
+                            visibility: "hidden",
+                            transition: "opacity .3s ease-out, visibility .3s ease-out",
+                            backgroundColor: "rgba(0,0,0,.3)"
+                        },
+                        content: {
+                            position: "relative",
+                            height: "100%"
                         }
                     }}
                 >
                     <span></span>
                 </Sidebar>
-                <nav className="text-secondary" ref={c => (this.nav = c)}>
+                <nav className="text-secondary">
                     <a href="#mobilenav" id="menu-open" onClick={this.menuOpen}>
                         <span className="icon">
                             <Hamburger />

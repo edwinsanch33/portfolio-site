@@ -5,7 +5,7 @@ import Navlinks from "./navlinks";
 import FooterLinks from "./footer-links";
 import "../style/footer.less";
 
-export default function() {
+export default function Footer() {
     const query = useStaticQuery(graphql`
         query {
             site {
